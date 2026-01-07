@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo — Web pro řemeslníka</title>
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0b1220;color:#eaf0ff}
+    .wrap{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+    a{color:inherit}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .back{opacity:.9;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:10px 12px;border-radius:12px}
+    .hero{margin-top:18px;border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:18px;background:rgba(255,255,255,.03)}
+    h1{margin:0 0 8px;font-size:34px;letter-spacing:-.02em}
+    .muted{color:#b9c5e6;margin:0}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;margin-top:12px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:16px;background:rgba(255,255,255,.03)}
+    .btn{display:inline-block;margin-top:10px;text-decoration:none;font-weight:900;border-radius:12px;padding:12px 14px;border:1px solid rgba(255,255,255,.18)}
+    .btn.primary{border:none;background:linear-gradient(90deg,#7aa2ff,#55e3c2);color:#061019}
+    label{display:block;font-size:13px;color:#b9c5e6;margin:10px 0 6px}
+    input,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.18);color:#eaf0ff}
+    textarea{min-height:110px}
+    ul{margin:10px 0 0;padding-left:18px;color:#b9c5e6}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <strong>Demo: Web pro řemeslníka</strong>
+      <a class="back" href="/">← Zpět na MK Digital</a>
+    </div>
+
+    <div class="hero">
+      <h1>Elektrikář Novák — rychlé opravy &amp; montáže</h1>
+      <p class="muted">Zlín a okolí • Výjezdy do 24 h • Férové ceny • Záruka na práci</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3 style="margin:0 0 6px">S čím pomůžu</h3>
+          <ul>
+            <li>opravy zásuvek, jističů, světel</li>
+            <li>montáže svítidel a rozvodů</li>
+            <li>revize a drobné elektropráce</li>
+          </ul>
+          <a class="btn primary" href="#poptavka">Nezávazně poptat</a>
+          <a class="btn" href="tel:+420731083240">Zavolat</a>
+        </div>
+
+        <div class="card" id="poptavka">
+          <h3 style="margin:0 0 6px">Poptávka (demo)</h3>
+          <p class="muted">Ukázkový formulář.</p>
+          <form onsubmit="event.preventDefault(); alert('Demo formulář (ukázka)');">
+            <label>Jméno</label>
+            <input required placeholder="Jan Novák" />
+            <label>Telefon</label>
+            <input required placeholder="+420 ..." />
+            <label>Co potřebujete?</label>
+            <textarea required placeholder="Popište problém…"></textarea>
+            <button class="btn primary" type="submit" style="width:100%;margin-top:10px">Odeslat</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

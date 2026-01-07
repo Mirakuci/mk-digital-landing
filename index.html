@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>MK Digital — Weby, úpravy a formuláře/kalkulačky</title>
+  <meta name="description" content="Moderní weby pro živnostníky a malé firmy. Úpravy webů, formuláře, kalkulačky. Rychlá domluva, jasný rozsah práce, výsledek bez chaosu." />
+
+  <meta property="og:title" content="MK Digital — Weby, úpravy a formuláře/kalkulačky" />
+  <meta property="og:description" content="Web, který přináší poptávky. A funkce, které šetří čas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image-1200x630.jpg" />
+
+  <link rel="icon" href="/assets/favicon.ico" />
+
+  <style>
+    :root{
+      --bg:#070b14;
+      --text:#eaf0ff;
+      --muted:#b9c5e6;
+      --line: rgba(255,255,255,.12);
+      --accent:#7aa2ff;
+      --accent2:#55e3c2;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --cardGrad: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      --cardGrad2: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      line-height: 1.55;
+      background:
+        radial-gradient(1200px 700px at 18% 0%, rgba(122,162,255,.22), transparent 55%),
+        radial-gradient(900px 520px at 85% 12%, rgba(85,227,194,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 110%, rgba(122,162,255,.12), transparent 55%),
+        var(--bg);
+    }
+    a{color:inherit}
+    .wrap{max-width:1120px;margin:0 auto;padding:26px 18px 72px}
+
+    /* Nav */
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .brand img{height:40px;width:auto;border-radius:10px}
+    .sub{color:var(--muted);font-size:13px}
+    .navlinks{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 14px;border-radius:999px;text-decoration:none;
+      border:1px solid var(--line); background: rgba(255,255,255,.03);
+      transition: transform .18s ease, border-color .18s ease;
+      font-weight:900;
+      font-size:13px;
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.2)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;align-items:stretch;margin-top:18px;}
+    @media (max-width: 920px){ .hero{grid-template-columns:1fr} }
+
+    .hcard{
+      border:1px solid var(--line); border-radius:20px;
+      background: var(--cardGrad);
+      padding:22px; box-shadow: var(--shadow);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .hcard:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18);}
+
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      color:var(--muted); font-size:12px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line); background: rgba(255,255,255,.03);
+    }
+    .kdot{width:8px;height:8px;border-radius:999px;background:rgba(122,162,255,.55)}
+
+    h1{margin:12px 0 10px;font-size:clamp(30px,4.3vw,48px);letter-spacing:-.02em;line-height:1.12}
+    .lead{margin:0 0 14px; color:var(--muted); font-size:clamp(16px,2.1vw,18px)}
+
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      cursor:pointer;
+      padding:12px 16px;border-radius:14px;
+      text-decoration:none;font-weight:1000;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      transition: transform .18s ease, border-color .18s ease;
+      min-height:44px;
+      font-size:14px;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.2)}
+    .btn.primary{
+      border:none;color:#061019;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .btn.ghost{background: rgba(255,255,255,.03)}
+    .full{width:100%;margin-top:12px}
+
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .badge{
+      font-size:12px;color:var(--muted);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:8px 10px;border-radius:999px;
+    }
+
+    .list{display:grid;gap:10px;margin:16px 0 0;padding:0;list-style:none}
+    .li{display:flex;gap:10px}
+    .check{
+      width:22px;height:22px;border-radius:7px;flex:0 0 auto;
+      border:1px solid var(--line);
+      background: rgba(122,162,255,.15);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:1000;
+    }
+
+    /* Sections */
+    .section{margin-top:34px}
+    .section h2{margin:0 0 10px;font-size:24px}
+    .muted{margin:0;color:var(--muted)}
+    .subline{margin-top:8px;color:var(--muted);font-size:13px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    @media (max-width: 920px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--line); border-radius:20px;
+      background: var(--cardGrad2);
+      padding:18px;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); box-shadow: 0 16px 50px rgba(0,0,0,.28)}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .card .btn{margin-top:12px}
+
+    /* Demos */
+    .demos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+    @media (max-width: 920px){ .demos{grid-template-columns:1fr} }
+
+    .demo{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+
+      border:1px solid var(--line);
+      border-radius:20px;
+      background: var(--cardGrad2);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .demo:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 16px 50px rgba(0,0,0,.28);
+    }
+    .demo:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(500px 220px at 20% 0%, rgba(122,162,255,.18), transparent 55%),
+        radial-gradient(500px 220px at 80% 10%, rgba(85,227,194,.14), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .demo > *{position:relative}
+    .demoTitle{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .demoTitle strong{font-size:16px}
+    .demoSmall{font-size:12px;color:var(--muted)}
+    .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{
+      font-size:12px;color:var(--muted);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:6px 10px;border-radius:999px;
+    }
+
+    /* Pricing */
+    .price{font-size:28px;font-weight:1100;letter-spacing:-.02em;margin:10px 0 6px}
+    .price span{font-size:14px;color:var(--muted);font-weight:900}
+    .highlight{
+      border-color: rgba(122,162,255,.35);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+
+    /* Steps */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    @media (max-width: 920px){ .steps{grid-template-columns:1fr} }
+    .stepnum{font-weight:1100;font-size:18px;color:rgba(255,255,255,.9)}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line); border-radius:16px;
+      background: rgba(255,255,255,.03);
+      padding:14px;
+    }
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:1100}
+
+    /* Form */
+    .contactbox h2{margin:0 0 6px;font-size:22px}
+    label{display:block;font-size:13px;color:var(--muted);margin:10px 0 6px}
+    input, textarea{
+      width:100%;padding:12px 12px;border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline: none;
+    }
+    input:focus, textarea:focus{border-color: rgba(122,162,255,.55)}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width: 720px){ .row{grid-template-columns:1fr} }
+    .note{font-size:12px;color:var(--muted);margin-top:8px}
+    #form-status{margin-top:10px}
+
+    /* Footer */
+    .footer{
+      margin-top:34px;
+      border-top:1px solid var(--line);
+      padding-top:18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+    .dim{opacity:.9}
+
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    @media (max-width: 920px){ .twoCol{grid-template-columns:1fr} }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand">
+        <img src="/assets/mk-digital-logo-320.webp" alt="MK Digital logo" onerror="this.onerror=null;this.src='/assets/mk-digital-logo-320.png';" />
+        <div>
+          <strong>MK Digital</strong><br />
+          <span class="sub">Weby • úpravy • formuláře/kalkulačky</span>
+        </div>
+      </div>
+
+      <nav class="navlinks">
+        <a class="pill" href="#ukazky">Ukázky</a>
+        <a class="pill" href="#balicky">Balíčky</a>
+        <a class="pill" href="#sluzby">Služby</a>
+        <a class="pill" href="#kontakt">Kontakt</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hcard">
+        <span class="kicker"><span class="kdot"></span> Pro živnostníky a malé firmy</span>
+
+        <h1>Web, který přináší poptávky.<br/>A funkce, které šetří čas.</h1>
+
+        <p class="lead">
+          Navrhnu a postavím moderní web, upravím váš stávající a doplním formuláře nebo kalkulačky.
+          <strong>Rychlá domluva, jasný rozsah práce a výsledek bez chaosu.</strong>
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="#kontakt">Nezávazně poptat</a>
+          <a class="btn ghost" href="#balicky">Zobrazit balíčky</a>
+          <a class="btn" href="https://wa.me/420731083240" target="_blank" rel="noopener">Napsat na WhatsApp</a>
+        </div>
+
+        <div class="badges">
+          <div class="badge">✅ Mobil/PC</div>
+          <div class="badge">✅ Jasný rozsah práce</div>
+          <div class="badge">✅ Rychlá domluva</div>
+          <div class="badge">✅ Lidsky, bez balastu</div>
+        </div>
+
+        <ul class="list">
+          <li class="li"><div class="check">✓</div><div><strong>Budí důvěru</strong> – čistý design a srozumitelná nabídka.</div></li>
+          <li class="li"><div class="check">✓</div><div><strong>Vede k akci</strong> – jasné CTA, kontakt a jednoduchá poptávka.</div></li>
+          <li class="li"><div class="check">✓</div><div><strong>Šetří čas</strong> – formuláře/kalkulačky místo přepisování a telefonátů.</div></li>
+        </ul>
+
+        <div class="note">
+          Většinou pracuji v balíčcích (START / STANDARD / PRO), ale vždy navrhnu řešení podle vašich potřeb.
+        </div>
+      </div>
+
+      <aside class="hcard contactbox" id="kontakt">
+        <h2>Nezávazná poptávka</h2>
+        <p class="muted">Napište mi pár vět. Ozvu se s návrhem postupu a orientační cenou.</p>
+
+        <form action="https://formspree.io/f/xaqnrbvl" method="POST" id="lead-form">
+          <div class="row">
+            <div>
+              <label>Jméno</label>
+              <input name="name" required placeholder="Např. Jan Novák" />
+            </div>
+            <div>
+              <label>E-mail</label>
+              <input name="email" required type="email" placeholder="např. jan@firma.cz" />
+            </div>
+          </div>
+
+          <label>Co potřebujete?</label>
+          <textarea name="message" required placeholder="Např. web pro elektrikáře (3 stránky), cíl: poptávky. Termín: do 14 dnů. Odkaz na web (pokud existuje): ..."></textarea>
+
+          <input type="hidden" name="_subject" value="Nová poptávka z webu MK Digital" />
+
+          <button class="btn primary full" type="submit">Odeslat poptávku</button>
+
+          <div class="note">
+            Odesláním souhlasíte se zpracováním kontaktních údajů pro účely vyřízení poptávky.
+          </div>
+
+          <div id="form-status" class="note"></div>
+        </form>
+
+        <div class="note" style="margin-top:12px">
+          <strong>Kontakt:</strong><br/>
+          <a href="mailto:mkdigitalproduct@gmail.com">mkdigitalproduct@gmail.com</a><br/>
+          <a href="tel:+420731083240">+420 731 083 240</a> •
+          <a href="https://wa.me/420731083240" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+
+        <div class="subline">
+          Tip: Nejrychlejší je WhatsApp – stačí napsat „Chci web“.
+        </div>
+      </aside>
+    </section>
+
+    <!-- UKÁZKY (FUNKČNÍ) -->
+    <section class="section" id="ukazky">
+      <h2>Ukázky / demo projekty</h2>
+      <p class="muted">Klikni na ukázku — otevře se reálná stránka. Kalkulačka je funkční.</p>
+
+      <div class="demos">
+        <a class="demo" href="/demos/remeslnik.html">
+          <div class="demoTitle">
+            <div>
+              <strong>Demo: Web pro řemeslníka</strong><br/>
+              <span class="demoSmall">nabídka + CTA + poptávkový formulář</span>
+            </div>
+            <span class="tag">Landing</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Mobil/PC</span>
+            <span class="tag">Kontakt</span>
+            <span class="tag">CTA</span>
+          </div>
+          <div class="subline">Otevřít ukázku →</div>
+        </a>
+
+        <a class="demo" href="/demos/sluzby.html">
+          <div class="demoTitle">
+            <div>
+              <strong>Demo: Web pro služby</strong><br/>
+              <span class="demoSmall">proces, důvěra, FAQ + rezervace (demo)</span>
+            </div>
+            <span class="tag">Web</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Sekce</span>
+            <span class="tag">Důvěra</span>
+            <span class="tag">FAQ</span>
+          </div>
+          <div class="subline">Otevřít ukázku →</div>
+        </a>
+
+        <a class="demo" href="/demos/kalkulacka.html">
+          <div class="demoTitle">
+            <div>
+              <strong>Demo: Kalkulačka ceny</strong><br/>
+              <span class="demoSmall">funkční výpočet + CTA</span>
+            </div>
+            <span class="tag">Funkce</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Kalkulačka</span>
+            <span class="tag">Formulář</span>
+            <span class="tag">UX</span>
+          </div>
+          <div class="subline">Otevřít ukázku →</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- BALÍČKY -->
+    <section class="section" id="balicky">
+      <h2>Balíčky (orientačně)</h2>
+      <p class="muted">Ceny jsou „od“. Přesnou cenu potvrdím po krátké domluvě a jasném rozsahu.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>START</h3>
+          <div class="price">od 6 900 Kč <span>bez DPH</span></div>
+          <p class="muted">Jednoduchý web/landing pro rychlý start a první poptávky.</p>
+          <ul class="list">
+            <li class="li"><div class="check">✓</div><div>1 stránka (landing)</div></li>
+            <li class="li"><div class="check">✓</div><div>Responzivní (mobil/PC)</div></li>
+            <li class="li"><div class="check">✓</div><div>Kontakt / formulář</div></li>
+          </ul>
+          <a class="btn" href="#kontakt">Chci START</a>
+        </div>
+
+        <div class="card highlight">
+          <h3>STANDARD</h3>
+          <div class="price">od 12 900 Kč <span>bez DPH</span></div>
+          <p class="muted">Nejčastější volba: více sekcí + lepší struktura + funkce navíc.</p>
+          <ul class="list">
+            <li class="li"><div class="check">✓</div><div>3–5 sekcí/stránek</div></li>
+            <li class="li"><div class="check">✓</div><div>Texty + CTA + FAQ</div></li>
+            <li class="li"><div class="check">✓</div><div>Formulář / jednoduchá kalkulačka</div></li>
+          </ul>
+          <a class="btn primary" href="#kontakt">Chci STANDARD</a>
+        </div>
+
+        <div class="card">
+          <h3>PRO</h3>
+          <div class="price">od 24 900 Kč <span>bez DPH</span></div>
+          <p class="muted">Řešení na míru: více funkcí, automatizace, individuální logika.</p>
+          <ul class="list">
+            <li class="li"><div class="check">✓</div><div>Kalkulačky / integrace</div></li>
+            <li class="li"><div class="check">✓</div><div>Více podstránek</div></li>
+            <li class="li"><div class="check">✓</div><div>Návrh řešení + konzultace</div></li>
+          </ul>
+          <a class="btn" href="#kontakt">Chci PRO</a>
+        </div>
+      </div>
+
+      <div class="twoCol">
+        <div class="card">
+          <h3>Co je v ceně vždy</h3>
+          <ul class="list">
+            <li class="li"><div class="check">✓</div><div>Jasný rozsah práce předem</div></li>
+            <li class="li"><div class="check">✓</div><div>Responzivita (mobil/PC)</div></li>
+            <li class="li"><div class="check">✓</div><div>Základní rychlost + struktura</div></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Co bývá navíc (dle domluvy)</h3>
+          <ul class="list">
+            <li class="li"><div class="check">✓</div><div>Další stránky / sekce</div></li>
+            <li class="li"><div class="check">✓</div><div>Pokročilejší kalkulačky</div></li>
+            <li class="li"><div class="check">✓</div><div>Automatizace a napojení</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLUŽBY -->
+    <section class="section" id="sluzby">
+      <h2>S čím pomůžu</h2>
+      <p class="muted">Nabídku držím jednoduchou. V praxi umím i individuální požadavky.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>1) Jednoduchý web pro podnikání</h3>
+          <p class="muted">1–5 stránek, responzivní, kontakt, základní SEO.</p>
+          <a class="btn" href="#kontakt">Poptat web</a>
+        </div>
+        <div class="card">
+          <h3>2) Úpravy a vylepšení stávajícího webu</h3>
+          <p class="muted">Opravy chyb, úpravy sekcí, zrychlení, lepší struktura.</p>
+          <a class="btn" href="#kontakt">Poptat úpravy</a>
+        </div>
+        <div class="card">
+          <h3>3) Formuláře, kalkulačky a automatizace</h3>
+          <p class="muted">Funkce, které zjednoduší poptávku a ušetří čas.</p>
+          <a class="btn" href="#kontakt">Poptat kalkulačku</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <h2>Časté otázky</h2>
+
+      <details>
+        <summary>Je to „ofiko“, když web běží na Vercelu?</summary>
+        <p class="muted">Ano. Web běží na zabezpečené adrese (HTTPS). Kdykoliv k tomu připojíme vlastní doménu.</p>
+      </details>
+
+      <details>
+        <summary>Jak rychle to může být hotové?</summary>
+        <p class="muted">Menší úpravy bývají rychle, u webu záleží na rozsahu. Termín domluvíme hned na začátku.</p>
+      </details>
+    </section>
+
+    <footer class="footer">
+      <div class="footrow">
+        <div>© <span id="y"></span> MK Digital</div>
+        <div class="dim">E-mail: mkdigitalproduct@gmail.com • Tel: +420 731 083 240 • ČR / online</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Formspree přes fetch + hláška bez přesměrování
+    const form = document.getElementById("lead-form");
+    const statusEl = document.getElementById("form-status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      statusEl.textContent = "Odesílám…";
+
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (res.ok) {
+          form.reset();
+          statusEl.textContent = "✅ Díky! Poptávka odeslána. Ozvu se co nejdřív.";
+        } else {
+          statusEl.textContent = "⚠️ Něco se nepovedlo. Zkuste to prosím znovu nebo napište e-mail.";
+        }
+      } catch {
+        statusEl.textContent = "⚠️ Chyba připojení. Zkuste to prosím znovu.";
+      }
+    });
+  </script>
+</body>
+</html>
